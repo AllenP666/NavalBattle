@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class ShipPlacer : MonoBehaviour
@@ -90,10 +91,10 @@ public class ShipPlacer : MonoBehaviour
 
         public Ship(int startX, int startY, int endX, int endY, int shipType)
         {
-            StartX = startY; // Сделано так, потому что изначалаьно координаты задаются как y,x
-            StartY = startX; // В этой части кода проще всего поменять значения
-            EndX = endY;
-            EndY = endX;
+            StartX = startX; // Сделано так, потому что изначалаьно координаты задаются как y,x
+            StartY = startY; // В этой части кода проще всего поменять значения
+            EndX = endX;
+            EndY = endY;
             ShipType = shipType;
         }
 
@@ -120,7 +121,7 @@ public class ShipPlacer : MonoBehaviour
             float randomNumber = Random.Range(0f, 1f);
             if (randomNumber > 0.5f) rotation = Quaternion.Euler(0, 180, 0);
             
-            if (ship.StartX != ship.EndX)
+            if (ship.StartX == ship.EndX)
             {
                 // Horizontal ship
                 if (randomNumber > 0.5f) rotation = Quaternion.Euler(0, -90, 0);
@@ -154,14 +155,14 @@ public class ShipPlacer : MonoBehaviour
 
     private Vector3 GetWorldPosition(int x, int y)
     {
-        GameObject cell = GameObject.Find(string.Format("PlayerCell_{0}_{1}", x, y));
+        GameObject cell = GameObject.Find(string.Format("PlayerCell_{0}_{1}", y, x));
         if (cell != null)
         {
             return cell.transform.position;
         }
         else
         {
-            Debug.LogError(string.Format("PlayerCell_{0}_{1} not found!", x, y));
+            Debug.LogError(string.Format("PlayerCell_{0}_{1} not found!", y, x));
             return Vector3.zero;
         }
     }
