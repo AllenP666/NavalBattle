@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     private bool isPlayerTurn = true;
     private int[,] gridPlayer = GameData.GridPlayer;
     private int[,] gridBot = GameData.GridBot;
-    public float shootDelay = 1f;
+    private int playerHitsCount = 0;
+    private int botHitsCount = 0;
+    private float shootDelay = 2f;
     public GameObject bombDroppingPrefab;
     public GameObject bombSwimmingPrefab;
     public GameObject smokePrefab;
@@ -18,10 +23,20 @@ public class GameController : MonoBehaviour
     public GameObject shipFourDeckFloatingPrefab;
     public GameObject botShips;
 
+    public Button gameEndButton;
+    public TextMeshProUGUI gameEndText;
+    public GameObject gameEndPanel;
+
 
     private List<Vector2Int> botPossibleTargets = new List<Vector2Int>();
     private HashSet<Vector2Int> playerShots = new HashSet<Vector2Int>();
     private HashSet<Vector2Int> botShots = new HashSet<Vector2Int>();
+
+    void Start()
+    {
+        gameEndPanel.SetActive(false);
+        gameEndButton.onClick.AddListener(GoToMenu);
+    }
 
     void Update()
     {
@@ -39,9 +54,14 @@ public class GameController : MonoBehaviour
         else
         {
             // Ход бота
-            Vector2Int botShot = BotShoot();
-            StartCoroutine(ShootWithDelay(gridPlayer, botShot.y, botShot.x, false));
-            isPlayerTurn = true;
+            if (shootDelay > 0) shootDelay -= Time.deltaTime;
+            else 
+            {
+                Vector2Int botShot = BotShoot();
+                Shoot(gridPlayer, botShot.y, botShot.x, false);
+                shootDelay = 2f;
+                isPlayerTurn = true;
+            }
         }
     }
 
@@ -63,7 +83,7 @@ public class GameController : MonoBehaviour
                     Vector2Int shotPosition = new Vector2Int(x, y);
                     if (!playerShots.Contains(shotPosition))
                     {
-                        StartCoroutine(ShootWithDelay(gridBot, y, x, true));
+                        Shoot(gridBot, y, x, true);
                         isPlayerTurn = false;
                     }
                     else
@@ -73,12 +93,6 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-    }
-
-    IEnumerator ShootWithDelay(int[,] grid, int y, int x, bool isPlayerShooting)
-    {
-        yield return new WaitForSeconds(shootDelay);
-        Shoot(grid, y, x, isPlayerShooting);
     }
 
     void Shoot(int[,] grid, int y, int x, bool isPlayerShooting)
@@ -115,6 +129,14 @@ public class GameController : MonoBehaviour
                 RevealAroundSunkenShip(grid, y, x, isPlayerShooting);
                 SunkShip(grid, y, x, isPlayerShooting);
             }
+
+            if (isPlayerShooting) playerHitsCount++;
+            else botHitsCount++;
+
+            if (playerHitsCount == 20) ShowGameEndPanel(true);
+            else if (botHitsCount == 20) ShowGameEndPanel(false);
+
+            isPlayerTurn = !isPlayerTurn;
         }
         else
         {
@@ -581,5 +603,21 @@ public class GameController : MonoBehaviour
             // Cconfigure the ship
             shipInstance.transform.SetLocalPositionAndRotation(position, rotation);
         }
+    }
+
+    private void ShowGameEndPanel(bool isPlayerWin)
+    {
+        if (isPlayerWin) gameEndText.text = "Победа!";
+        else gameEndText.text = "Проигрыш.";
+        gameEndPanel.SetActive(true);
+
+        GameObject menuButton = GameObject.Find("MenuButton");
+        menuButton.SetActive(false);
+
+    }
+
+    void GoToMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }

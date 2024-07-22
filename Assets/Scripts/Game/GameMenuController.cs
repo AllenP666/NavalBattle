@@ -12,7 +12,6 @@ public class GameMenuController : MonoBehaviour
     public Button infoButton; // Ссылка на кнопку инофрмации об игре
     public Button closeInfoButton; // Ссылка на кнопку закрытия инофрмации об игре
 
-
     void Start()
     {
         // Скрываем панель меню при старте
