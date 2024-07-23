@@ -30,15 +30,15 @@ public class ShipLayoutController : MonoBehaviour
         toggleButton.onClick.AddListener(TogglePopup);
 
         // Установить текст правил
-        rulesText.text = "Правила расстановки кораблей:\n" +
-                         "1. Расставьте все свои корабли на игровом поле.\n" +
-                         "2. Корабли не могут касаться друг друга боками или углами.\n" +
-                         "3. Корабли могут быть расставлены только горизонтально или вертикально.\n" +
-                         "4. У каждого игрока есть:\n" +
-                         "   - Один четырехпалубный корабль\n" +
-                         "   - Два трехпалубных корабля\n" +
-                         "   - Три двухпалубных корабля\n" +
-                         "   - Четыре однопалубных корабля";
+        rulesText.text = "Rules for ship placement:\n" + "\n" +
+                         "1. Place all your ships on the game board.\n" +
+                         "2. Ships cannot touch each other by sides or corners.\n" +
+                         "3. Ships can only be placed horizontally or vertically.\n" +
+                         "4. Each player has:\n" +
+                         "   - One four-deck ship\n" +
+                         "   - Two three-deck ships\n" +
+                         "   - Three two-deck ships\n" +
+                         "   - Four one-deck ships";
     }
 
     private void TogglePopup()

@@ -9,6 +9,10 @@ public class GridGeneratorUI : MonoBehaviour
     public Sprite cellSelectedSprite;       // Sprite for selected cell
     public Sprite cellDefaultSprite;        // Sprite for default cell
     public TextMeshProUGUI rotateText;
+    public TextMeshProUGUI oneDeckNumber;
+    public TextMeshProUGUI twoDeckNumber;
+    public TextMeshProUGUI threeDeckNumber;
+    public TextMeshProUGUI fourDeckNumber;
     public int rows = 10;                   // Number of rows
     public int columns = 10;                // Number of columns
     public float cellSize = 75f;            // Cell size in pixels
@@ -31,6 +35,7 @@ public class GridGeneratorUI : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        ChangeShipNumber();
 
         // Add button listeners
         GameObject.Find("OneDeckShipButton").GetComponent<Button>().onClick.AddListener(() => SelectShip(1));
@@ -44,12 +49,14 @@ public class GridGeneratorUI : MonoBehaviour
     {
         ClearGridData();
         PlaceShips();
+        ChangeShipNumber();
     }
 
     public void ClearGrid()
     {
         ClearGridData();
         UpdateCellVisuals();
+        ChangeShipNumber();
     }
 
     void GenerateGrid()
@@ -104,6 +111,7 @@ public class GridGeneratorUI : MonoBehaviour
             }
         }
         UpdateCellVisuals();
+        ChangeShipNumber();
     }
 
     bool PlaceShip(int size)
@@ -202,6 +210,8 @@ public class GridGeneratorUI : MonoBehaviour
             { 2, 3 },
             { 1, 4 }
         };
+
+        ChangeShipNumber();
     }
 
     void SelectShip(int size)
@@ -250,6 +260,8 @@ public class GridGeneratorUI : MonoBehaviour
             remainingShips[selectedShipSize]--;
             selectedShipSize = -1; // Reset selection after placing
         }
+
+        ChangeShipNumber();
     }
 
     void RemoveShip(int x, int y)
@@ -299,8 +311,9 @@ public class GridGeneratorUI : MonoBehaviour
 
         // Decrease the count of remaining ships of this size
         remainingShips[shipSize]++;
-
+        
         UpdateCellVisuals();
+        ChangeShipNumber();
     }
 
     public bool AreAllShipsPlaced()
@@ -315,6 +328,14 @@ public class GridGeneratorUI : MonoBehaviour
 
         GameData.GridPlayer = gridPlayer;
         return true;
+    }
+
+    void ChangeShipNumber()
+    {
+        oneDeckNumber.text = remainingShips[1].ToString() + " X";
+        twoDeckNumber.text = remainingShips[2].ToString() + " X";
+        threeDeckNumber.text = "X " + remainingShips[3].ToString();
+        fourDeckNumber.text = "X " + remainingShips[4].ToString();
     }
 
 }
