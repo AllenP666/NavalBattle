@@ -58,9 +58,9 @@ public class GameController : MonoBehaviour
             else 
             {
                 Vector2Int botShot = BotShoot();
-                Shoot(gridPlayer, botShot.y, botShot.x, false);
+                Shoot(gridPlayer, botShot.y, botShot.x, isPlayerTurn);
                 shootDelay = 2f;
-                isPlayerTurn = true;
+                isPlayerTurn = !isPlayerTurn;
             }
         }
     }
@@ -83,8 +83,8 @@ public class GameController : MonoBehaviour
                     Vector2Int shotPosition = new Vector2Int(x, y);
                     if (!playerShots.Contains(shotPosition))
                     {
-                        Shoot(gridBot, y, x, true);
-                        isPlayerTurn = false;
+                        Shoot(gridBot, y, x, isPlayerTurn);
+                        isPlayerTurn = !isPlayerTurn;
                     }
                     else
                     {

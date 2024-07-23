@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u041F\u043E\u043B\u0435 (\u0447\u0438\u0441\u0442\u043E\u0435 \u0434\u043D\u043E)"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80290d85cac079d4d80d9155f2980a6e, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -990,7 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168870485}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: SeaBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3782,14 +3786,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3822,7 +3826,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -3841,12 +3845,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 7.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2102838359}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &711712577
 GameObject:
@@ -9640,7 +9644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e4f873eba8918469475462f49bd023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootDelay: 1
   bombDroppingPrefab: {fileID: 8307389253207047673, guid: 4e9b476cfcfe15049b20735b759c4f25, type: 3}
   bombSwimmingPrefab: {fileID: 2113918109989788715, guid: b5247fee631b2b34baf734fceb3c5d18, type: 3}
   smokePrefab: {fileID: 3239465408081734576, guid: 9e486c090561fe84b93073b6fe0deb1c, type: 3}
@@ -10473,7 +10476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1947956707}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: SeaPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10582,7 +10585,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 2000
+  far clip plane: 5000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -10598,7 +10601,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1956596970
@@ -10609,13 +10612,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956596965}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 22.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!1 &1963193200
 GameObject:
   m_ObjectHideFlags: 0
@@ -11226,6 +11229,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: 80290d85cac079d4d80d9155f2980a6e, type: 3}
+      propertyPath: m_CastShadows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: 80290d85cac079d4d80d9155f2980a6e, type: 3}
       propertyPath: m_AABB.m_Center.y
       value: -0.00017398293
       objectReference: {fileID: 0}
@@ -11244,6 +11251,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 80290d85cac079d4d80d9155f2980a6e, type: 3}
       propertyPath: m_Name
       value: "\u041F\u043E\u043B\u0435 (\u0447\u0438\u0441\u0442\u043E\u0435 \u0434\u043D\u043E)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80290d85cac079d4d80d9155f2980a6e, type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11600,6 +11611,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 446740785}
+  - {fileID: 705507995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2102838360
@@ -11815,7 +11827,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 705507995}
   - {fileID: 1956596970}
   - {fileID: 255544297}
   - {fileID: 2102838359}
